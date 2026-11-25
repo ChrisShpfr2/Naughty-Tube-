@@ -151,19 +151,19 @@ export function SandboxView() {
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
       {/* Left controls */}
       <div className="lg:col-span-4 space-y-6">
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+        <div className="bg-[#151a22] border border-zinc-800/90 rounded-xl p-5">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-base font-semibold text-white">Engine Switches</h2>
             <button
               type="button"
               onClick={resetSimulation}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors whitespace-nowrap shrink-0"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-zinc-300 bg-zinc-800 hover:bg-zinc-700 rounded-lg transition-colors whitespace-nowrap shrink-0"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               Reset Page
             </button>
           </div>
-          <div className="divide-y divide-slate-800">
+          <div className="divide-y divide-zinc-800/80">
             {[
               { key: 'banners' as const, label: 'Auto-Reject Cookies', detail: 'privacy.js · Opt.COOKIE_BANNERS' },
               { key: 'popups' as const, label: 'Global Pop-up Blocker', detail: 'BrowserController + privacy.js · Opt.POPUPS' },
@@ -175,8 +175,8 @@ export function SandboxView() {
               return (
                 <div key={item.key} className="py-3 first:pt-0 last:pb-0 flex items-center justify-between gap-4">
                   <div className="min-w-0">
-                    <div className="text-sm font-medium text-slate-100">{item.label}</div>
-                    <div className="text-xs text-slate-400 font-mono truncate">{item.detail}</div>
+                    <div className="text-sm font-medium text-zinc-100">{item.label}</div>
+                    <div className="text-xs text-zinc-400 font-mono truncate">{item.detail}</div>
                   </div>
                   <button
                     type="button"
@@ -184,7 +184,7 @@ export function SandboxView() {
                     aria-checked={active}
                     onClick={() => toggleOpt(item.key)}
                     className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border transition-colors ${
-                      active ? 'bg-sky-500 border-sky-400' : 'bg-slate-800 border-slate-700'
+                      active ? 'bg-[#c81e25] border-[#ff5258]' : 'bg-zinc-800 border-zinc-700'
                     }`}
                   >
                     <span
@@ -199,22 +199,22 @@ export function SandboxView() {
           </div>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+        <div className="bg-[#151a22] border border-zinc-800/90 rounded-xl p-5">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-sm font-semibold text-white">Automation Event Log</h3>
-            <span className="text-xs text-slate-400 tabular-nums">{logs.length} events</span>
+            <span className="text-xs text-zinc-400 tabular-nums">{logs.length} events</span>
           </div>
           {logs.length === 0 ? (
-            <p className="text-xs text-slate-500">Reset the simulated page or click elements to observe automation events.</p>
+            <p className="text-xs text-zinc-500">Reset the simulated page or click elements to observe automation events.</p>
           ) : (
             <div className="space-y-2.5 max-h-64 overflow-y-auto pr-1">
               {logs.map((entry) => (
-                <div key={entry.id} className="text-xs border-b border-slate-800/70 pb-2 last:border-0 last:pb-0">
-                  <div className="flex items-center justify-between gap-2 text-slate-200 font-medium">
+                <div key={entry.id} className="text-xs border-b border-zinc-800/70 pb-2 last:border-0 last:pb-0">
+                  <div className="flex items-center justify-between gap-2 text-zinc-200 font-medium">
                     <span>{entry.action}</span>
-                    <span className="font-mono text-[11px] text-slate-500 tabular-nums">{entry.time}</span>
+                    <span className="font-mono text-[11px] text-zinc-500 tabular-nums">{entry.time}</span>
                   </div>
-                  <div className="text-slate-400 mt-0.5">{entry.detail}</div>
+                  <div className="text-zinc-400 mt-0.5">{entry.detail}</div>
                 </div>
               ))}
             </div>
@@ -223,18 +223,18 @@ export function SandboxView() {
       </div>
 
       {/* Right simulated WebView viewport */}
-      <div className="lg:col-span-8 bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-        <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between gap-4 bg-slate-900/90">
-          <div className="flex items-center gap-3 text-xs text-slate-400 min-w-0">
-            <ShieldCheck className="w-4 h-4 text-sky-400 shrink-0" />
+      <div className="lg:col-span-8 bg-[#151a22] border border-zinc-800/90 rounded-xl overflow-hidden">
+        <div className="px-4 py-3 border-b border-zinc-800 flex items-center justify-between gap-4 bg-[#151a22]">
+          <div className="flex items-center gap-3 text-xs text-zinc-400 min-w-0">
+            <ShieldCheck className="w-4 h-4 text-[#ff5258] shrink-0" />
             <span className="font-mono truncate">https://stream-example.test/watch</span>
             <span aria-hidden="true">·</span>
-            <span className="tabular-nums shrink-0 text-slate-300">{popupsBlocked} pop-ups blocked</span>
+            <span className="tabular-nums shrink-0 text-zinc-300">{popupsBlocked} pop-ups blocked</span>
           </div>
           <button
             type="button"
             onClick={triggerTestPopup}
-            className="px-3 py-1.5 text-xs font-medium text-slate-200 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors whitespace-nowrap shrink-0"
+            className="px-3 py-1.5 text-xs font-medium text-zinc-200 bg-zinc-800 hover:bg-zinc-700 rounded-lg transition-colors whitespace-nowrap shrink-0"
           >
             Trigger Pop-up Ad
           </button>
@@ -244,80 +244,80 @@ export function SandboxView() {
           {/* Row of simulated gates */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Cookie consent box */}
-            <div className="border border-slate-800 rounded-lg p-4 bg-slate-950/60">
+            <div className="border border-zinc-800 rounded-lg p-4 bg-[#0e1217]">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-medium text-slate-400">CMP Cookie Dialog</span>
+                <span className="text-xs font-medium text-zinc-400">CMP Cookie Dialog</span>
                 <span className={`text-xs font-medium ${cookieState === 'rejected' ? 'text-emerald-400' : 'text-amber-400'}`}>
                   {cookieState === 'rejected' ? 'Auto-Rejected' : cookieState === 'accepted' ? 'Accepted' : 'Waiting'}
                 </span>
               </div>
               {cookieState === 'visible' ? (
                 <div className="space-y-3">
-                  <p className="text-xs text-slate-300">We use cookies and 42 partners for personalized ads.</p>
+                  <p className="text-xs text-zinc-300">We use cookies and 42 partners for personalized ads.</p>
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
                       onClick={() => setCookieState('rejected')}
-                      className="px-3 py-1.5 text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-md"
+                      className="px-3 py-1.5 text-xs font-medium bg-zinc-800 hover:bg-zinc-700 text-zinc-200 rounded-md"
                     >
                       Reject All
                     </button>
                     <button
                       type="button"
                       onClick={() => setCookieState('accepted')}
-                      className="px-3 py-1.5 text-xs font-medium bg-sky-600 text-white rounded-md"
+                      className="px-3 py-1.5 text-xs font-medium bg-[#c81e25] text-white rounded-md"
                     >
                       Accept All
                     </button>
                   </div>
                 </div>
               ) : (
-                <p className="text-xs text-slate-500">Banner dismissed with Reject All and scroll unlocked.</p>
+                <p className="text-xs text-zinc-500">Banner dismissed with Reject All and scroll unlocked.</p>
               )}
             </div>
 
             {/* Age verification box */}
-            <div className="border border-slate-800 rounded-lg p-4 bg-slate-950/60">
+            <div className="border border-zinc-800 rounded-lg p-4 bg-[#0e1217]">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-medium text-slate-400">18+ Age Verification Gate</span>
+                <span className="text-xs font-medium text-zinc-400">18+ Age Verification Gate</span>
                 <span className={`text-xs font-medium ${ageState === 'bypassed' ? 'text-emerald-400' : 'text-amber-400'}`}>
                   {ageState === 'bypassed' ? 'Bypassed' : ageState === 'exited' ? 'Exited' : 'Blocking'}
                 </span>
               </div>
               {ageState === 'visible' ? (
                 <div className="space-y-3">
-                  <p className="text-xs text-slate-300">This site contains age-restricted media. Confirm you are 18+.</p>
+                  <p className="text-xs text-zinc-300">This site contains age-restricted media. Confirm you are 18+.</p>
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
                       onClick={() => setAgeState('bypassed')}
-                      className="px-3 py-1.5 text-xs font-medium bg-sky-600 text-white rounded-md"
+                      className="px-3 py-1.5 text-xs font-medium bg-[#c81e25] text-white rounded-md"
                     >
                       I am 18+ · Enter
                     </button>
                     <button
                       type="button"
                       onClick={() => setAgeState('exited')}
-                      className="px-3 py-1.5 text-xs font-medium bg-slate-800 text-slate-300 rounded-md"
+                      className="px-3 py-1.5 text-xs font-medium bg-zinc-800 text-zinc-300 rounded-md"
                     >
                       Exit
                     </button>
                   </div>
                 </div>
               ) : (
-                <p className="text-xs text-slate-500">Age verification prompt accepted automatically.</p>
+                <p className="text-xs text-zinc-500">Age verification prompt accepted automatically.</p>
               )}
             </div>
           </div>
 
           {/* Preferred content selector */}
-          <div className="border border-slate-800 rounded-lg p-4 bg-slate-950/60">
+          <div className="border border-zinc-800 rounded-lg p-4 bg-[#0e1217]">
             <div className="flex items-center justify-between mb-3">
               <div>
-                <div className="text-xs font-medium text-slate-300">Content Orientation Selector</div>
-                <div className="text-xs text-slate-500 mt-0.5">Preferred filter enforces Straight and Lesbian only</div>
+                <div className="text-xs font-medium text-zinc-300">Content Orientation Selector</div>
+                <div className="text-xs text-zinc-500 mt-0.5">Preferred filter enforces Straight and Lesbian only</div>
               </div>
-              <span className={`text-xs font-medium ${prefsSaved ? 'text-emerald-400' : 'text-slate-400'}`}>
+              <span className={`text-xs font-medium ${prefsSaved ? 'text-emerald-400' : 'text-zinc-400'}`}>
                 {prefsSaved ? 'Filtered' : 'Default'}
               </span>
             </div>
@@ -327,15 +327,15 @@ export function SandboxView() {
                   key={name}
                   className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-md border text-xs cursor-pointer transition-colors ${
                     checked
-                      ? 'bg-sky-500/15 border-sky-500/50 text-sky-200'
-                      : 'bg-slate-900 border-slate-800 text-slate-400'
+                      ? 'bg-[#c81e25]/15 border-[#ff5258]/50 text-rose-200'
+                      : 'bg-zinc-900 border-zinc-800 text-zinc-400'
                   }`}
                 >
                   <input
                     type="checkbox"
                     checked={checked}
                     onChange={() => setPrefs((p) => ({ ...p, [name]: !p[name] }))}
-                    className="accent-sky-500"
+                    className="accent-[#e1262d]"
                   />
                   <span>{name}</span>
                 </label>
@@ -346,19 +346,19 @@ export function SandboxView() {
           {/* Click-to-Fullscreen Video Player */}
           <div
             ref={videoContainerRef}
-            className={`relative border border-slate-800 rounded-lg overflow-hidden bg-black ${
+            className={`relative border border-zinc-800 rounded-lg overflow-hidden bg-black ${
               videoFullscreen ? 'fixed inset-0 z-50 rounded-none border-0 flex flex-col justify-center' : ''
             }`}
           >
             <div
               onClick={handleVideoClick}
-              className={`relative cursor-pointer select-none flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 via-slate-950 to-black ${
+              className={`relative cursor-pointer select-none flex flex-col items-center justify-center bg-gradient-to-br from-[#161c24] via-[#0e1217] to-black ${
                 videoFullscreen ? 'h-full w-full' : 'h-56'
               }`}
             >
               <video ref={videoRef} className="hidden" muted playsInline />
               <div className="text-center px-4">
-                <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-sky-500/20 border border-sky-400/40 flex items-center justify-center text-sky-300">
+                <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-[#c81e25]/20 border border-[#ff5258]/40 flex items-center justify-center text-[#ff5258]">
                   <Maximize2 className="w-5 h-5" />
                 </div>
                 <div className="text-sm font-medium text-white">
@@ -368,7 +368,7 @@ export function SandboxView() {
                       : 'Playing Inline'
                     : 'Click Video to Open & Play in Full-Screen'}
                 </div>
-                <div className="text-xs text-slate-400 mt-1">
+                <div className="text-xs text-zinc-400 mt-1">
                   Click triggers requestFullscreen() / onShowCustomView() automatically
                 </div>
               </div>
@@ -379,7 +379,7 @@ export function SandboxView() {
                     e.stopPropagation();
                     exitSimulatedFullscreen();
                   }}
-                  className="mt-6 px-4 py-2 text-xs font-medium bg-slate-800 hover:bg-slate-700 text-white rounded-lg border border-slate-700"
+                  className="mt-6 px-4 py-2 text-xs font-medium bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg border border-zinc-700"
                 >
                   Exit Full-Screen
                 </button>

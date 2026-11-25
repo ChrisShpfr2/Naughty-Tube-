@@ -5,6 +5,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInHorizontally
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -38,6 +39,8 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import org.wishy.browser.BrowserController
@@ -73,9 +76,21 @@ fun MenuSheet(c: BrowserController) {
                     verticalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
                     item {
-                        Column(Modifier.padding(bottom = 4.dp)) {
-                            Text("Wishy Browse", style = MaterialTheme.typography.titleLarge, fontFamily = org.wishy.browser.ui.theme.BagelFatOne)
-                            Text("Version ${c.versionName}", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Row(
+                            Modifier.padding(bottom = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(14.dp)
+                        ) {
+                            Image(
+                                painterResource(R.drawable.naughty_tube_logo),
+                                contentDescription = "Naughty Tube logo",
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier.size(52.dp).clip(RoundedCornerShape(14.dp))
+                            )
+                            Column {
+                                Text("Naughty Tube", style = MaterialTheme.typography.titleLarge, fontFamily = org.wishy.browser.ui.theme.BagelFatOne, color = MaterialTheme.colorScheme.primary)
+                                Text("Version ${c.versionName}", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            }
                         }
                     }
                     item { CurrentPageCard(c) }
@@ -133,8 +148,8 @@ fun MenuSheet(c: BrowserController) {
                     }
                     item { SectionLabel("About") }
                     item { ActionRow(Sym.Code, "Developer", "wishissue") { c.openPage(Page.DEVELOPER) } }
-                    item { ActionRow(Sym.Description, "Credits", "Open-source projects behind Wishy") { c.openPage(Page.CREDITS) } }
-                    item { ActionRow(Sym.VolunteerActivism, "Donate", "Keep Wishy free and ad-free") { c.openPage(Page.DONATE) } }
+                    item { ActionRow(Sym.Description, "Credits", "Open-source projects behind Naughty Tube") { c.openPage(Page.CREDITS) } }
+                    item { ActionRow(Sym.VolunteerActivism, "Donate", "Keep Naughty Tube free and ad-free") { c.openPage(Page.DONATE) } }
                     item { Spacer(Modifier.height(6.dp)) }
                     item { ActionRow(Sym.Close, "Exit browser") { c.exitApp() } }
                 }
@@ -144,7 +159,7 @@ fun MenuSheet(c: BrowserController) {
 }
 
 internal fun paletteName(id: String): String =
-    org.wishy.browser.ui.theme.PALETTE_INFOS.firstOrNull { it.id == id }?.label ?: "Wishy Blue"
+    org.wishy.browser.ui.theme.PALETTE_INFOS.firstOrNull { it.id == id }?.label ?: "Naughty Crimson"
 
 private class FeatureTile(val icon: ImageVector, val title: String, val subtitle: String, val onClick: () -> Unit)
 

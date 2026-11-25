@@ -598,7 +598,7 @@ class BrowserController(
 
     fun setUpdateCheck(on: Boolean) {
         prefs.updateCheck = on; updateCheckOn = on
-        notify(NoteKind.INFO, if (on) "Update notices on" else "Update notices off", if (on) "Wishy asks GitHub once a day. Nothing is downloaded." else null, Sym.TipsAndUpdates)
+        notify(NoteKind.INFO, if (on) "Update notices on" else "Update notices off", if (on) "Naughty Tube asks GitHub once a day. Nothing is downloaded." else null, Sym.TipsAndUpdates)
     }
 
     /** Called once after start-up. Asks about updates (at most daily), then shows whatever is due. */

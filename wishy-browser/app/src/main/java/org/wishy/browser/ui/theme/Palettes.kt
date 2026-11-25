@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Color
 class PaletteInfo(val id: String, val label: String, val seed: Color)
 
 val PALETTE_INFOS: List<PaletteInfo> = listOf(
-    PaletteInfo("wishy", "Wishy Blue", Color(0xFF1560D4)),
+    PaletteInfo("wishy", "Naughty Crimson", Color(0xFFE1262D)),
     PaletteInfo("orion", "Orion", Color(0xFF6366F1)),
     PaletteInfo("ocean", "Ocean", Color(0xFF0EA5E9)),
     PaletteInfo("forest", "Forest", Color(0xFF16A34A)),

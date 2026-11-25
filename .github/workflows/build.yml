@@ -1,4 +1,4 @@
-name: Build WishyBrowser APK
+name: Build Naughty Tube APK
 
 on:
   push:
@@ -21,8 +21,14 @@ jobs:
           distribution: temurin
           java-version: 21
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Configure Android SDK licenses
+        run: |
+          SDK_DIR="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          if [ -d "$SDK_DIR" ]; then
+            mkdir -p "$SDK_DIR/licenses"
+            printf "\n24333f8a63b6825ea9c5514f83c2829b004d1fee\n8933bad161af4178b1185d1a37fbf41ea5269c55\nd56f5187479451eabf01fb78af6dfcb131a6481e\n" > "$SDK_DIR/licenses/android-sdk-license"
+            printf "\n84831b9409646a918e30573bab4c9c91346d8abd\n" > "$SDK_DIR/licenses/android-sdk-preview-license"
+          fi
 
       - name: Locate Android project
         id: project
@@ -80,7 +86,7 @@ jobs:
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: WishyBrowser-apk
+          name: NaughtyTube-apk
           path: apk-artifacts/*
           if-no-files-found: error
 

@@ -61,7 +61,31 @@ const MODIFIED_FILES = [
     path: '.github/workflows/build.yml',
     status: 'modified',
     feature: 'Automatic GitHub APK CI/CD workflow',
-    summary: 'Automatically builds the universal APK on every push, PR, tag, or manual dispatch, generates SHA256 checksums, and uploads artifacts.'
+    summary: 'Removed broken setup-android@v3 step, configured Android SDK licenses directly, and builds NaughtyTube APKs with SHA256 checksums automatically.'
+  },
+  {
+    path: 'app/src/main/res/values/strings.xml',
+    status: 'modified',
+    feature: 'Naughty Tube app branding',
+    summary: 'Renamed Android & Fire TV app_name to Naughty Tube and updated window_bg / adaptive launcher background to deep charcoal.'
+  },
+  {
+    path: 'app/src/main/res/drawable-xhdpi/tv_banner.png',
+    status: 'modified',
+    feature: 'Fire TV banner & launcher icons',
+    summary: 'Updated Fire TV leanback banner, adaptive/mipmap launcher icons, and in-app drawable assets with the Naughty Tube logo.'
+  },
+  {
+    path: 'app/src/main/java/org/wishy/browser/ui/theme/WishyBrand.kt',
+    status: 'modified',
+    feature: 'Naughty Crimson theme palette',
+    summary: 'Restyled default dark, dusk, AMOLED, and light themes to Naughty Crimson (#E1262D / #FF5258) over deep charcoal slate (#0E1217).'
+  },
+  {
+    path: 'app/src/main/java/org/wishy/browser/ui/HomeScreen.kt',
+    status: 'modified',
+    feature: 'In-app Naughty Tube logo & branding',
+    summary: 'Added the Naughty Tube logo and title header across HomeScreen, MenuSheet, PromoCard, and About screens.'
   }
 ];
 
@@ -186,7 +210,7 @@ async function startServer() {
         platform: 'UNIX'
       });
       res.setHeader('Content-Type', 'application/zip');
-      res.setHeader('Content-Disposition', 'attachment; filename="WishyBrowser-modified-repo.zip"');
+      res.setHeader('Content-Disposition', 'attachment; filename="NaughtyTube-repo.zip"');
       res.setHeader('Content-Length', String(buffer.length));
       res.send(buffer);
     } catch (err) {
@@ -210,7 +234,7 @@ async function startServer() {
   }
 
   app.listen(PORT, '0.0.0.0', () => {
-    console.log(`WishyBrowser Mod Studio running on http://0.0.0.0:${PORT}`);
+    console.log(`Naughty Tube Mod Studio running on http://0.0.0.0:${PORT}`);
   });
 }
 

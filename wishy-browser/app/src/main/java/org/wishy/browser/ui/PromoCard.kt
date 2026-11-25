@@ -5,6 +5,7 @@ import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -43,11 +44,14 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import org.wishy.browser.BrowserController
 import org.wishy.browser.Promo
+import org.wishy.browser.R
 
 /**
  * The big, friendly card shown on top of the browser for two things only: "a new version exists" and the
@@ -97,20 +101,26 @@ fun PromoHost(c: BrowserController) {
 private fun Banner(icon: androidx.compose.ui.graphics.vector.ImageVector) {
     val cs = MaterialTheme.colorScheme
     Box(
-        Modifier.fillMaxWidth().height(150.dp).background(cs.primaryContainer),
+        Modifier.fillMaxWidth().height(156.dp).background(cs.surfaceContainerLowest),
         contentAlignment = Alignment.Center
     ) {
+        Image(
+            painterResource(R.drawable.naughty_tube_banner),
+            contentDescription = "Naughty Tube banner",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
         Box(
-            Modifier.size(104.dp).clip(MaterialShapes.Cookie9Sided.toShape()).background(cs.surfaceContainerHigh),
+            Modifier.align(Alignment.BottomEnd).padding(12.dp).size(44.dp).clip(CircleShape).background(cs.surfaceContainerHigh.copy(alpha = 0.9f)),
             contentAlignment = Alignment.Center
-        ) { Icon(icon, null, Modifier.size(54.dp), tint = cs.primary) }
+        ) { Icon(icon, null, Modifier.size(22.dp), tint = cs.primary) }
     }
 }
 
 @Composable
 private fun UpdateBody(p: Promo.Update, c: BrowserController, focus: FocusRequester) {
     val cs = MaterialTheme.colorScheme
-    Text("A new Wishy Browse is out", style = MaterialTheme.typography.headlineSmallEmphasized, textAlign = TextAlign.Center, modifier = Modifier.reveal(0))
+    Text("A new Naughty Tube is out", style = MaterialTheme.typography.headlineSmallEmphasized, textAlign = TextAlign.Center, modifier = Modifier.reveal(0))
     Surface(color = cs.secondaryContainer, shape = CircleShape, modifier = Modifier.padding(top = 12.dp).reveal(1)) {
         Text(
             "${p.current}  →  ${p.version}", Modifier.padding(horizontal = 16.dp, vertical = 6.dp),
@@ -139,14 +149,14 @@ private fun UpdateBody(p: Promo.Update, c: BrowserController, focus: FocusReques
 private fun DonateBody(p: Promo.Donate, c: BrowserController, focus: FocusRequester) {
     val cs = MaterialTheme.colorScheme
     val used = if (p.months <= 1) "a month" else "${p.months} months"
-    Text("Thank you for using Wishy", style = MaterialTheme.typography.headlineSmallEmphasized, textAlign = TextAlign.Center, modifier = Modifier.reveal(0))
+    Text("Thank you for using Naughty Tube", style = MaterialTheme.typography.headlineSmallEmphasized, textAlign = TextAlign.Center, modifier = Modifier.reveal(0))
     Text(
-        "You have been browsing with Wishy for about $used.",
+        "You have been browsing with Naughty Tube for about $used.",
         style = MaterialTheme.typography.titleMedium, color = cs.primary, textAlign = TextAlign.Center,
         modifier = Modifier.padding(top = 8.dp).reveal(1)
     )
     Text(
-        "Wishy is free, with no ads and no trackers. It is made by one person and kept alive by people like you. " +
+        "Naughty Tube is free, with no ads and no trackers. It is made by one person and kept alive by people like you. " +
             "If it has made your TV nicer to use, you can buy me a coffee. It pays for updates and new features, and it means a lot.",
         style = MaterialTheme.typography.bodyLarge, color = cs.onSurfaceVariant, textAlign = TextAlign.Center,
         modifier = Modifier.padding(top = 14.dp).reveal(2)

@@ -386,7 +386,7 @@ fun SettingsPage(c: BrowserController) {
             }
             item { ActionRow(Sym.Refresh, "Check for a new version now", "Version ${c.versionName}") { c.checkForUpdate(manual = true) } }
             item { SectionLabel("System") }
-            item { ActionRow(Sym.OpenInNew, "Set as default browser", "Open links from other apps in Wishy") { c.openDefaultBrowserSettings() } }
+            item { ActionRow(Sym.OpenInNew, "Set as default browser", "Open links from other apps in Naughty Tube") { c.openDefaultBrowserSettings() } }
         }
     }
 }

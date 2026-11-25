@@ -114,15 +114,37 @@ fun HomeScreen(c: BrowserController) {
         Column(Modifier.fillMaxSize().safeDrawingPadding().padding(horizontal = 48.dp, vertical = 20.dp)) {
             Row(
                 Modifier.fillMaxWidth().focusProperties { down = c.urlFocus },
-                horizontalArrangement = Arrangement.End, verticalAlignment = Alignment.CenterVertically
+                horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically
             ) {
-                ShieldPill(c)
-                Spacer(Modifier.size(12.dp))
-                BadgedIconButton(Sym.Notifications, "Notifications", c.unreadNotes, { c.openPage(Page.NOTIFICATIONS) })
-                Spacer(Modifier.size(12.dp))
-                TvIconButton(Sym.BookmarkFilled, "Bookmarks", { c.openPage(Page.BOOKMARKS) })
-                Spacer(Modifier.size(12.dp))
-                TvIconButton(Sym.MoreVert, "Menu", { c.openPage(Page.MENU) })
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(14.dp)
+                ) {
+                    Image(
+                        painterResource(R.drawable.naughty_tube_banner),
+                        contentDescription = "Naughty Tube logo",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .height(52.dp)
+                            .width(92.dp)
+                            .clip(RoundedCornerShape(14.dp))
+                    )
+                    Text(
+                        "Naughty Tube",
+                        style = MaterialTheme.typography.titleLarge,
+                        fontFamily = BagelFatOne,
+                        color = cs.primary
+                    )
+                }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    ShieldPill(c)
+                    Spacer(Modifier.size(12.dp))
+                    BadgedIconButton(Sym.Notifications, "Notifications", c.unreadNotes, { c.openPage(Page.NOTIFICATIONS) })
+                    Spacer(Modifier.size(12.dp))
+                    TvIconButton(Sym.BookmarkFilled, "Bookmarks", { c.openPage(Page.BOOKMARKS) })
+                    Spacer(Modifier.size(12.dp))
+                    TvIconButton(Sym.MoreVert, "Menu", { c.openPage(Page.MENU) })
+                }
             }
 
             LazyColumn(

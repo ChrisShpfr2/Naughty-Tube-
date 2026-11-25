@@ -109,7 +109,7 @@ class CursorLibrary(context: Context, private val prefs: Prefs) {
             c.connectTimeout = 8000
             c.readTimeout = 10000
             c.instanceFollowRedirects = true
-            c.setRequestProperty("User-Agent", "WishyBrowser")
+            c.setRequestProperty("User-Agent", "NaughtyTube")
             if (c.responseCode !in 200..299) error("The server answered ${c.responseCode}")
             return readLimited(c.inputStream)
         } finally {
@@ -135,7 +135,7 @@ class CursorLibrary(context: Context, private val prefs: Prefs) {
      * pass the result to [register] on the UI thread.
      */
     fun create(bytes: ByteArray, rawName: String, tipTopLeft: Boolean): CursorImage {
-        val bmp = decodeScaled(bytes) ?: error("That file is not a picture Wishy can read")
+        val bmp = decodeScaled(bytes) ?: error("That file is not a picture Naughty Tube can read")
         val id = "custom_" + System.currentTimeMillis()
         val file = "$id.png"
         File(customDir, file).outputStream().use { bmp.compress(Bitmap.CompressFormat.PNG, 100, it) }

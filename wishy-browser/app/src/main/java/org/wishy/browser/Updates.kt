@@ -28,7 +28,7 @@ object UpdateCheck {
         try {
             c.connectTimeout = 8000
             c.readTimeout = 8000
-            c.setRequestProperty("User-Agent", "WishyBrowser")
+            c.setRequestProperty("User-Agent", "NaughtyTube")
             c.setRequestProperty("Accept", "application/vnd.github+json")
             if (c.responseCode !in 200..299) error("GitHub answered ${c.responseCode}")
             val text = c.inputStream.bufferedReader().use { it.readText() }

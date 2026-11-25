@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -26,13 +27,25 @@ fun DeveloperPage(c: BrowserController) {
     PageScaffold("Developer", { c.popPage() }) {
         LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             item {
-                Column(Modifier.padding(bottom = 12.dp).reveal(0)) {
-                    Text("wishissue", style = MaterialTheme.typography.headlineLargeEmphasized)
-                    Text("Maker of Wishy Browse", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    Text(
-                        "A fast, private browser built for the big screen.",
-                        style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(top = 8.dp)
+                Row(
+                    Modifier.padding(bottom = 12.dp).reveal(0),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(20.dp)
+                ) {
+                    Image(
+                        painterResource(R.drawable.naughty_tube_banner),
+                        contentDescription = "Naughty Tube logo",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.width(176.dp).height(99.dp).clip(RoundedCornerShape(20.dp))
                     )
+                    Column {
+                        Text("Naughty Tube", style = MaterialTheme.typography.headlineLargeEmphasized, color = MaterialTheme.colorScheme.primary)
+                        Text("Built on WishyBrowser by wishissue", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(
+                            "A fast, private browser built for the big screen.",
+                            style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(top = 6.dp)
+                        )
+                    }
                 }
             }
             item { ActionRow(Sym.Code, "GitHub profile", "github.com/wishissue") { c.open(GITHUB) } }
@@ -65,7 +78,7 @@ fun CreditsPage(c: BrowserController) {
         LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             item {
                 Text(
-                    "Wishy stands on the work of these open-source projects. Select one to read about it.",
+                    "Naughty Tube stands on the work of these open-source projects. Select one to read about it.",
                     style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
@@ -90,7 +103,7 @@ fun DonatePage(c: BrowserController) {
         ) {
             item {
                 Text(
-                    "Wishy is free, ad-free and tracker-free.",
+                    "Naughty Tube is free, ad-free and tracker-free.",
                     style = MaterialTheme.typography.headlineSmallEmphasized, textAlign = TextAlign.Center
                 )
             }
@@ -104,7 +117,7 @@ fun DonatePage(c: BrowserController) {
                 Box(
                     Modifier.reveal(1).size(264.dp).clip(RoundedCornerShape(32.dp)).background(androidx.compose.ui.graphics.Color.White).padding(14.dp)
                 ) {
-                    Image(painterResource(R.drawable.qr_donate), "QR code for the Wishy Browse donation page", Modifier.fillMaxSize())
+                    Image(painterResource(R.drawable.qr_donate), "QR code for the Naughty Tube donation page", Modifier.fillMaxSize())
                 }
             }
             item { Text(DONATE_URL.removePrefix("https://"), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary) }
