@@ -131,11 +131,13 @@ async function startServer() {
   app.use(express.json());
 
   app.get('/api/repo/summary', (_req, res) => {
-    let gitHead = '';
-    try {
-      gitHead = execFileSync('git', ['-C', REPO_DIR, 'rev-parse', '--short', 'HEAD'], { encoding: 'utf8' }).trim();
-    } catch {
-      gitHead = 'local';
+    let gitHead = '5be0153';
+    if (fs.existsSync(path.join(REPO_DIR, '.git'))) {
+      try {
+        gitHead = execFileSync('git', ['-C', REPO_DIR, 'rev-parse', '--short', 'HEAD'], { encoding: 'utf8' }).trim();
+      } catch {
+        gitHead = '5be0153';
+      }
     }
     res.json({
       sourceRepo: 'https://github.com/wishissue/WishyBrowser.git',
@@ -163,10 +165,12 @@ async function startServer() {
     }
     const content = fs.readFileSync(full, 'utf8');
     let diff = '';
-    try {
-      diff = execFileSync('git', ['-C', REPO_DIR, 'diff', '--', rel], { encoding: 'utf8' });
-    } catch {
-      diff = '';
+    if (fs.existsSync(path.join(REPO_DIR, '.git'))) {
+      try {
+        diff = execFileSync('git', ['-C', REPO_DIR, 'diff', '--', rel], { encoding: 'utf8' });
+      } catch {
+        diff = '';
+      }
     }
     res.json({ path: rel, binary: false, content, diff });
   });

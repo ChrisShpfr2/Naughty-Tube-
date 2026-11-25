@@ -32,11 +32,12 @@ git push -u origin main`;
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
       <div className="lg:col-span-5 space-y-6">
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-4">
-          <h2 className="text-base font-semibold text-white">Push to Your New Git Repository</h2>
+          <h2 className="text-base font-semibold text-white">Automatic GitHub Actions APK Build</h2>
           <p className="text-sm text-slate-300 leading-relaxed">
-            The modified WishyBrowser repository includes the ready-to-run GitHub Actions workflow at{' '}
-            <code className="text-xs font-mono text-sky-300">.github/workflows/build.yml</code>. Every push triggers a
-            universal Android APK build automatically.
+            The workflow is placed at both the repository root{' '}
+            <code className="text-xs font-mono text-sky-300">.github/workflows/build.yml</code> and inside{' '}
+            <code className="text-xs font-mono text-sky-300">wishy-browser/</code>, so syncing this project directly to
+            GitHub or pushing the extracted ZIP triggers the universal APK build automatically under the Actions tab.
           </p>
           <a
             href="/api/repo/download.zip"
