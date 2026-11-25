@@ -1,0 +1,6 @@
+{
+  "name": "WishyBrowser Mod Studio",
+  "description": "Enhanced WishyBrowser Android repository with auto-reject cookies, global ad & popup blocker, auto-fullscreen videos, age verification bypass, Straight & Lesbian content filter, and GitHub Actions APK workflow.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
