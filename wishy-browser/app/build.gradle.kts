@@ -12,7 +12,7 @@ android {
     compileSdkMinor = 1
 
     defaultConfig {
-        applicationId = "wishissue.wishybrowser"
+        applicationId = "org.naughtytube.browser"
         minSdk = 24          // system WebView needs no engine, so older TV boxes work too
         targetSdk = 36
         versionCode = 13
@@ -41,6 +41,8 @@ android {
                     storePassword = storePass
                     keyAlias = setting("WISHY_KEY_ALIAS") ?: "wishy"
                     keyPassword = keyPass
+                    enableV1Signing = true
+                    enableV2Signing = true
                 }
             }
         }
@@ -121,7 +123,8 @@ tasks.matching { it.name == "assembleDebug" || it.name == "assembleRelease" }.co
         val out = outputDir.asFile
         out.mkdirs()
         distDir.asFile.mkdirs()
-        apkDir.get().asFile.walkTopDown().filter { it.isFile && it.extension == "apk" }
+        apkDir.get().asFile.walkTopDown()
+            .filter { it.isFile && it.extension == "apk" && !it.name.contains("-unsigned") }
             .forEach {
                 it.copyTo(File(out, it.name), overwrite = true)
                 it.copyTo(File(distDir.asFile, it.name), overwrite = true)

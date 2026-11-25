@@ -52,6 +52,7 @@
         android:allowBackup="false"
         android:banner="@drawable/tv_banner"
         android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:theme="@style/Theme.WishyBrowser"
         android:supportsRtl="true"
@@ -89,7 +90,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <!-- Lets the OS offer Wishy Browse as a handler for plain web
+            <!-- Lets the OS offer Naughty Tube as a handler for plain web
                  links tapped in other apps, and (on devices that support it)
                  as a choice for "default browser". -->
             <intent-filter>

@@ -34,10 +34,11 @@ git push -u origin main`;
         <div className="bg-[#151a22] border border-zinc-800/90 rounded-xl p-6 space-y-4">
           <h2 className="text-base font-semibold text-white">Automatic GitHub Actions APK Build</h2>
           <p className="text-sm text-zinc-300 leading-relaxed">
-            The workflow at <code className="text-xs font-mono text-[#ff6b70]">.github/workflows/build.yml</code> omits
-            the deprecated <code className="text-xs font-mono text-[#ff6b70]">setup-android@v3</code> step (which fails
-            on missing <code className="text-xs font-mono text-zinc-200">tools</code>), accepts Android SDK licenses
-            directly, and builds the Naughty Tube APK automatically on every push.
+            The workflow at <code className="text-xs font-mono text-[#ff6b70]">.github/workflows/build.yml</code> accepts
+            Android SDK licenses directly, verifies the APK signature with <code className="text-xs font-mono text-zinc-200">apksigner</code>,
+            and publishes a direct <code className="text-xs font-mono text-zinc-200">NaughtyTube.apk</code> to GitHub Releases
+            on every push to <code className="text-xs font-mono text-zinc-200">main</code> so Fire TV Downloader can install it
+            without needing to unzip an Actions artifact.
           </p>
           <a
             href="/api/repo/download.zip"

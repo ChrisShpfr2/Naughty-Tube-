@@ -69,18 +69,26 @@ jobs:
           WISHY_KEY_PASSWORD: ${{ secrets.WISHY_KEY_PASSWORD }}
         run: ./gradlew --no-daemon assembleRelease
 
-      - name: Collect APKs and Generate Checksums
+      - name: Collect Signed APK and Verify Signature
         working-directory: ${{ steps.project.outputs.dir }}
         run: |
           mkdir -p "${{ github.workspace }}/apk-artifacts"
-          find app/build/outputs/apk -type f -name "*.apk" -exec cp -f {} "${{ github.workspace }}/apk-artifacts/" \; || true
-          if [ -d "dist" ]; then
-            find dist -type f -name "*.apk" -exec cp -f {} "${{ github.workspace }}/apk-artifacts/" \; || true
+          SIGNED_APK=$(find app/build/outputs/apk -type f -name "*.apk" ! -name "*-unsigned.apk" | head -n 1)
+          if [ -z "$SIGNED_APK" ] && [ -d "dist" ]; then
+            SIGNED_APK=$(find dist -type f -name "*.apk" ! -name "*-unsigned.apk" | head -n 1)
+          fi
+          if [ -z "$SIGNED_APK" ]; then
+            echo "No signed APK was produced" >&2
+            exit 1
+          fi
+          cp -f "$SIGNED_APK" "${{ github.workspace }}/apk-artifacts/NaughtyTube.apk"
+          SDK_DIR="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          APKSIGNER=$(find "$SDK_DIR/build-tools" -name "apksigner" 2>/dev/null | sort -V | tail -n 1)
+          if [ -n "$APKSIGNER" ]; then
+            "$APKSIGNER" verify --print-certs "${{ github.workspace }}/apk-artifacts/NaughtyTube.apk"
           fi
           cd "${{ github.workspace }}/apk-artifacts"
-          for f in *.apk; do
-            [ -e "$f" ] && sha256sum "$f" > "$f.sha256"
-          done
+          sha256sum NaughtyTube.apk > NaughtyTube.apk.sha256
           ls -la
 
       - name: Upload APK Artifact
@@ -90,8 +98,22 @@ jobs:
           path: apk-artifacts/*
           if-no-files-found: error
 
-      - name: Attach APK to GitHub Release (version tags only)
+      - name: Publish Direct APK to GitHub Release (Latest Build)
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Naughty Tube (Latest APK)
+          prerelease: true
+          make_latest: "true"
+          files: |
+            apk-artifacts/NaughtyTube.apk
+            apk-artifacts/NaughtyTube.apk.sha256
+
+      - name: Attach APK to GitHub Release (version tags)
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          files: apk-artifacts/*
+          files: |
+            apk-artifacts/NaughtyTube.apk
+            apk-artifacts/NaughtyTube.apk.sha256

@@ -61,7 +61,19 @@ const MODIFIED_FILES = [
     path: '.github/workflows/build.yml',
     status: 'modified',
     feature: 'Automatic GitHub APK CI/CD workflow',
-    summary: 'Removed broken setup-android@v3 step, configured Android SDK licenses directly, and builds NaughtyTube APKs with SHA256 checksums automatically.'
+    summary: 'Builds signed NaughtyTube.apk, verifies signature via apksigner, and publishes direct .apk assets to GitHub Releases on main pushes and version tags.'
+  },
+  {
+    path: 'app/build.gradle.kts',
+    status: 'modified',
+    feature: 'Unique package ID & v1/v2 signing',
+    summary: 'Updated applicationId to org.naughtytube.browser to prevent signature collisions on Fire TV and filtered out unsigned APK outputs.'
+  },
+  {
+    path: 'app/src/main/AndroidManifest.xml',
+    status: 'modified',
+    feature: 'Fire TV & launcher configuration',
+    summary: 'Configured LEANBACK_LAUNCHER, LAUNCHER, tv_banner, and round/adaptive launcher icon attributes.'
   },
   {
     path: 'app/src/main/res/values/strings.xml',
@@ -73,7 +85,7 @@ const MODIFIED_FILES = [
     path: 'app/src/main/res/drawable-xhdpi/tv_banner.png',
     status: 'modified',
     feature: 'Fire TV banner & launcher icons',
-    summary: 'Updated Fire TV leanback banner, adaptive/mipmap launcher icons, and in-app drawable assets with the Naughty Tube logo.'
+    summary: 'Updated Fire TV leanback banner and optimized drawable-nodpi logo/banner assets for low-RAM Fire TV Sticks.'
   },
   {
     path: 'app/src/main/java/org/wishy/browser/ui/theme/WishyBrand.kt',
